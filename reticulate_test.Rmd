@@ -1,0 +1,80 @@
+---
+title: "reticulate_test"
+author: "Dana S"
+date: "1/14/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+```{r}
+
+# Tutorial based on:
+# https://anderfernandez.com/en/blog/how-to-use-python-in-r/
+
+
+library(reticulate)
+
+use_miniconda()
+
+```
+
+
+```{python}
+
+a = "Hello" + " World"
+print(a)
+
+
+```
+```{r}
+# how to call python variables in R
+
+py$a
+
+# now, generate a variable in R
+
+b = "Good morning!"
+
+```
+
+
+```{python}
+
+r.b
+
+```
+
+```{r}
+
+#py_install("pandas")
+
+# running python code in R
+
+np <- import("numpy", convert = TRUE)
+np1 <- np$array(c(1:4))
+np1
+
+# to avoid automatic translation of variables into R objects, you will need to set your convert function to FALSE
+
+rm(np, np1)
+
+np <- import("numpy", convert = FALSE)
+np1 <- np$array(c(1:4))
+np1
+
+
+py_run_string("import numpy as np")
+py_run_string("np2 = np.array(range(4))")
+
+
+
+```
+
+
+
